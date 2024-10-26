@@ -1,0 +1,29 @@
+
+{% if auth is not empty %}
+
+<h1>Nombres des Authors est : {{auth|length}}</h1>
+<table border='1'>
+    <tr>
+       <th>ID </th>
+       <th>username </th>
+       <th>email </th>
+       <th>nb_books </th>
+       <th>picture </th>
+       <th>Actions </th>
+    </tr>
+        {% set nbTotal = 0 %}
+    <tr   {% for au in auth%}>
+        {% set nbTotal=nbTotal+ au.nb_books%}
+       <td> {{au.id}} </td>
+       <td> {{au.username| upper}} </td>
+       <td> {{au.email}} </td>
+       <td> {{au.nb_books}} </td>
+       <td> <img src="{{au.picture}}" style="width:50px;heigth:50px;">  </td>
+        <td> <a href="{{path('d',{'id':au.id})}}">Details</a></td>
+    </tr  {% endfor%}>
+   </table>
+   {% else %}
+    <h1> No authors found </h1>
+    {% endif %}
+
+    <h1> Nombres des livres est : {{nbTotal}} </h1>

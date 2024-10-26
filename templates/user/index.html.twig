@@ -1,0 +1,22 @@
+<table border='1'>
+ <tr>
+    <th>ID </th>
+    <th>name </th>
+    <th>email </th>
+    <th>age </th>
+    <th>image </th>
+ </tr>
+ <tr   {% for us in users%}>
+    {% if us.age > 30 %}
+    <td> {{us.id}} </td>
+    <td> {{us.name | upper}} </td>
+    <td> {{us.email}} </td>
+    <td> {{us.age}} </td>
+    <td> <img src="{{us.image}}">  </td>
+
+    {% endif %}
+ </tr  {% endfor%}>
+</table>
+
+{% set x = 5%}
+{{x}}
