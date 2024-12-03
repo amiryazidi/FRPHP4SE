@@ -6,6 +6,7 @@ use App\Entity\Student;
 use App\Form\StudentType;
 use App\Repository\ClassroomRepository;
 use App\Repository\StudentRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,4 +72,15 @@ class StudentController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('listStudents');
     }
-}
+
+    #[Route('/ListDQL', name: 'ListDQL')]
+    public function ListDQL(EntityManagerInterface $em)
+    {
+       $req = $em-> createQuery("select a from App\Entity\Student a where a.username='amir' "); // select * from student
+         $students = $req->getResult();  // execute la requete
+
+       return $this->render('student/listDQL.html.twig',
+       ['students' => $students]);
+      
+    }
+} 
